@@ -81,4 +81,4 @@ for node in job_net.nodes:
     node['value'] = len(neighbor_map[node['id']])
 # add neighbor data to node hover data
 job_net.show_buttons(filter_=['physics'])
-job_net.show('hello.html')
+job_net.show('knowledge_graph.html')
