@@ -1,38 +1,46 @@
 from datetime import datetime
 from pyvis.network import Network
-import networkx as nx
+# import networkx as nx
 from dateutil import parser
 import pandas as pd
 
-df = pd.read_json("job_descri_data.json")
+resume_read = pd.read_json("resumes.json")
+resumes = resume_read["resumes"].array
+
+df = pd.read_json("job_description.json")
 jobs = df["jobs"].array
 
 jobid = []
 skills = []
 year = []
 
-counter=0
+counter = 0
 
 for job in jobs:
-    jobid.append(job["id"])
-    skills.append(job["category"])
-    duration = datetime.now() - parser.parse(job["publication_date"])
-    year.append(duration.seconds)
-    counter+=1
-    if(counter==10):
+    _skills =job["skills"].split(",")
+    for eachSkill in _skills:
+        jobid.append(job["_id"])
+        skills.append(eachSkill)
+        # duration = datetime.now() # - parser.parse(job["publication_date"])
+        year.append(5)
+    counter += 1
+    if(counter == 2):
         break
 
 kjobid = []
 kskills = []
 
+resume_counter=0
 
-for k in range(2):
+for resume in resumes:
     # arbitary value to generate othe id
-    kjobid.append(jobs[k]["id"]+841843278)
-    kskills.append(jobs[k]["category"])
+    for skill in resume["careerjunction_za_skills"]:
+        kjobid.append(resume["id"])
+        kskills.extend(resume["careerjunction_za_skills"])
+    resume_counter += 1
+    if(resume_counter == 2):
+        break
 
-
-net = Network()
 
 job_net = Network(height='1000px', width='100%',
                   bgcolor='#222222', font_color='white')
@@ -67,7 +75,7 @@ for j, e in enumerate(edge_data):
     else:
         job_net.add_edge(src, dst, value=0.1, dashes=True)
 for j, e in enumerate(resume_edge):
-    src = 'resume'
+    src = "ResumeId-" + str(e[0])
     dst = e[1]
 
     job_net.add_node(src, src, color='#dd4b39', title=src)
