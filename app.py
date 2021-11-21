@@ -1,6 +1,6 @@
 from datetime import datetime
 from pyvis.network import Network
-# import networkx as nx
+import networkx as nx
 from dateutil import parser
 import pandas as pd
 
@@ -45,7 +45,9 @@ for resume in resumes:
 job_net = Network(height='1000px', width='100%',
                   bgcolor='#222222', font_color='white')
 
-job_net.barnes_hut()
+G =nx.Graph();
+job_net=G;
+# job_net.barnes_hut()
 sources = jobid
 targets = skills
 values = year
