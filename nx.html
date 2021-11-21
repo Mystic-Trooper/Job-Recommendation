@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#dd4b39", "id": "2b387592-8148-5720-a661-a2730061d14c", "label": "2b387592-8148-5720-a661-a2730061d14c", "shape": "dot", "size": 10, "title": "2b387592-8148-5720-a661-a2730061d14c"}, {"experience": 5, "id": "Emergency Handling", "label": "Emergency Handling", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"color": "#dd4b39", "id": "ResumeId-1", "label": "ResumeId-1", "shape": "dot", "size": 10, "title": "ResumeId-1"}, {"color": "#dd4b39", "id": "ResumeId-2", "label": "ResumeId-2", "shape": "dot", "size": 10, "title": "ResumeId-2"}, {"experience": 5, "id": "Microbiology", "label": "Microbiology", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "microsoft powerpoint", "label": "microsoft powerpoint", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "microsoft office", "label": "microsoft office", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "microsoft excel", "label": "microsoft excel", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "microsoft project management", "label": "microsoft project management", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Microsoft word", "label": "Microsoft word", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Outlook", "label": "Outlook", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Internet explorer", "label": "Internet explorer", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Marketing/Sales", "label": "Marketing/Sales", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Quality Control", "label": "Quality Control", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Quality Assurance", "label": "Quality Assurance", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Research and development", "label": "Research and development", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "Problem solving", "label": "Problem solving", "shape": "dot", "size": 10, "title": ["Emergency Handling", "Microbiology", "microsoft powerpoint", "microsoft office", "microsoft excel", "microsoft project management", "Microsoft word", "Outlook", "Internet explorer", "Marketing/Sales", "Quality Control", "Quality Assurance", "Research and development", "Problem solving"]}, {"experience": 5, "id": "MVC5", "label": "MVC5", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "JQuery", "label": "JQuery", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "C#", "label": "C#", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "BootStrap", "label": "BootStrap", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "REST Services", "label": "REST Services", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "EntityFrameWork 6", "label": "EntityFrameWork 6", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "SQL Databse Development", "label": "SQL Databse Development", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "SSRS", "label": "SSRS", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}, {"experience": 5, "id": "SSIS", "label": "SSIS", "shape": "dot", "size": 10, "title": ["MVC5", "JQuery", "C#", "BootStrap", "REST Services", "EntityFrameWork 6", "SQL Databse Development", "Emergency Handling", "SSRS", "SSIS"]}]);
+        edges = new vis.DataSet([{"color": "#FFFF00", "from": "2b387592-8148-5720-a661-a2730061d14c", "label": 2, "to": "Emergency Handling", "value": 2, "weight": 1}, {"color": "#00ff1e", "from": "Emergency Handling", "to": "ResumeId-1", "weight": 1}, {"color": "#00ff1e", "from": "Emergency Handling", "to": "ResumeId-2", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Microbiology", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "microsoft powerpoint", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "microsoft office", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "microsoft excel", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "microsoft project management", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Microsoft word", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Outlook", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Internet explorer", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Marketing/Sales", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Quality Control", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Quality Assurance", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Research and development", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-1", "to": "Problem solving", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "MVC5", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "JQuery", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "C#", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "BootStrap", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "REST Services", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "EntityFrameWork 6", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "SQL Databse Development", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "SSRS", "weight": 1}, {"color": "#00ff1e", "from": "ResumeId-2", "to": "SSIS", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
