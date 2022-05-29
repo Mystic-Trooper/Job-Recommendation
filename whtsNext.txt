@@ -1,0 +1,7 @@
+1. Unstrctured resume & job description
+    1.1 Need to use NLP
+    1.2 Grab nodes and edges
+2. an android/web app to upload resume and get job recomendation
+
+///other
+networkx vs neo 4j
